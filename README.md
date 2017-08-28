@@ -403,6 +403,23 @@ func (d *Durations) Clear() {
 }
 ```
 
+### Hide default value of custom type
+
+If your custom type implements a `IsDefault` method (returning a boolean), the help message generation will make use of it to decide whether or not to display the default value.
+
+```go
+type Action string
+
+// Make it implement flag.Value
+:
+:
+
+// Make it multi-valued
+func (a *Action) IsDefault() bool {
+	return (*a) == "nop"
+}
+```
+
 ## Interceptors
 
 It is possible to define snippets of code to be executed before and after a command or any of its sub commands is executed.
